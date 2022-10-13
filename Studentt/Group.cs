@@ -188,7 +188,7 @@ namespace Studentt
             try
             {
             if (index < 0 || index >= students.Count)
-                    throw new Exception("Некорректный индекс, по которому находится обЪект класса студент!");
+                    throw new Exception("Некорректный индекс, по которому находится обЪект класса студент, которого надо перевести!");
             destination.AddStudent(students.ElementAt(index));
             StudentExpulsion(index);
             }
@@ -208,7 +208,7 @@ namespace Studentt
             try
             {
                 if (index < 0 || index >= students.Count)
-                    throw new Exception("Некорректный индекс, по которому находится обЪект класса студент!");
+                    throw new Exception("Некорректный индекс, по которому находится обЪект класса студент, которого надо отчислить!");
                 this.students.RemoveAt(index);
             }
             catch (Exception e)

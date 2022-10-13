@@ -33,7 +33,7 @@
             Group group = new Group();
             group.PrintGroup();
             Student s = group.WorstStudentExpulsion();
-            s.PrintInfo() ;
+            s.PrintInfo();
             Console.WriteLine("\n");
             group.PrintGroup();
             Group group1 = new Group();
