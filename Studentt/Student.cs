@@ -373,5 +373,24 @@ namespace Studentt
                 Console.Write(item + "\t");
             }
         }
+        public static bool operator ==(Student left, Student right)
+        {
+            return (left.ExamsRate() == right.ExamsRate());
+        }
+
+        public static bool operator !=(Student left, Student right)
+        {
+            return (left.ExamsRate() != right.ExamsRate());
+        }
+
+        public static bool operator >(Student left, Student right)
+        {
+            return (left.ExamsRate() > right.ExamsRate());
+        }
+
+        public static bool operator <(Student left, Student right)
+        {
+            return (left.ExamsRate() < right.ExamsRate());
+        }
     }
 }

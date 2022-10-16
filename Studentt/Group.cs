@@ -243,5 +243,15 @@ namespace Studentt
             StudentExpulsion(worstIndex);
             return worst;
         }
+
+        public static bool operator ==(Group left, Group right)
+        {
+            return left.students.Count == right.students.Count;
+        }
+
+        public static bool operator !=(Group left, Group right)
+        {
+            return left.students.Count != right.students.Count;
+        }
     }
 }
