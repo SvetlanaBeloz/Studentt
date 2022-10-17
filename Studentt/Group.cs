@@ -118,6 +118,9 @@ namespace Studentt
             get => this.courseNumber;
         }
 
+       /// <summary>
+       /// Вывод информации о студенте на экран
+       ///</summary>
 
         public void PrintGroup()
         {
@@ -215,17 +218,34 @@ namespace Studentt
             StudentExpulsion(worstIndex);
             return worst;
         }
+        /// <summary>
+        /// Перегрузка оператора ==
+        /// </summary>
+        /// <param name="left">Группа номер один</param>
+        /// <param name="right">Группа номер два</param>
+        /// <returns>переменную типа bool</returns>
 
         public static bool operator ==(Group left, Group right)
         {
             return left.students.Count == right.students.Count;
         }
+        /// <summary>
+        /// Перегрузка оператора !=
+        /// </summary>
+        /// <param name="left">Группа номер один</param>
+        /// <param name="right">Группа номер два</param>
+        /// <returns>переменную типа bool</returns>
 
         public static bool operator !=(Group left, Group right)
         {
             return left.students.Count != right.students.Count;
         }
-
+        /// <summary>
+        /// Перегрузка индексатора с одним параметром
+        /// </summary>
+        /// <param name="index">индекс в коллекции студентов</param>
+        /// <returns>студента по индексу</returns>
+        /// <exception cref="IndexOutOfRangeException"></exception>
         public Student this[int index]
         {
             get

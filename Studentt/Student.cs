@@ -276,7 +276,10 @@ namespace Studentt
             }
             get => this.birthday;
         }
-
+        /// <summary>
+        /// Формирование случайной даты в заданном диапазоне
+        /// </summary>
+        /// <returns>день рождения</returns>
 
         public DateTime RandomDay()
         {
@@ -328,15 +331,17 @@ namespace Studentt
                 Console.Write(item + "\t");
             }
         }
+   
         public static bool operator ==(Student left, Student right)
         {
             return (left.ExamsRate() == right.ExamsRate());
         }
-
+     
         public static bool operator !=(Student left, Student right)
         {
             return (left.ExamsRate() != right.ExamsRate());
         }
+
 
         public static bool operator >(Student left, Student right)
         {
@@ -347,6 +352,7 @@ namespace Studentt
         {
             return (left.ExamsRate() < right.ExamsRate());
         }
+
         public override string ToString()
         {
             string result = string.Empty;
