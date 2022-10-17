@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,7 +13,7 @@ namespace Studentt
 {
     public class Group
     {
-        private List<Student> students = new List<Student>();
+        private List<Student> students = new ();
         private string groupName = "ПУ111";
         private string specialization = "Программирование на .Net";
         private int courseNumber = 2;
@@ -25,9 +26,9 @@ namespace Studentt
             for (int i = 0; i < 12; i++)
             {
                 students.Add(new Student());
-                SetCourseNumber(courseNumber);
-                SetGroupName(groupName);
-                SetSpecialization(specialization);
+                CourseNumber = courseNumber;
+                GroupName = groupName;
+                Specialization = specialization;
             }
         }
 
@@ -40,9 +41,9 @@ namespace Studentt
             for (int i = 0; i < number; i++)
             {
                 students.Add(new Student());
-                SetCourseNumber(courseNumber);
-                SetGroupName(groupName);
-                SetSpecialization(specialization);
+                CourseNumber = courseNumber;
+                GroupName = groupName;
+                Specialization = specialization;
             }
         }
 
@@ -53,9 +54,9 @@ namespace Studentt
         public Group(List<Student> students)
         {
             this.students = students;
-            SetCourseNumber(courseNumber);
-            SetGroupName(groupName);
-            SetSpecialization(specialization);
+            CourseNumber = courseNumber;
+            GroupName = groupName;
+            Specialization = specialization;
         }
 
         /// <summary>
@@ -76,84 +77,55 @@ namespace Studentt
         }
 
         /// <summary>
-        /// запись названия группы
+        /// Свойства поля названия группы
         /// </summary>
-        /// <param name="groupName">Название группы</param>
 
-        public void SetGroupName(string groupName)
+        public string GroupName
         {
-            this.groupName = groupName;
+            get => this.groupName;
+            set => this.groupName = value;
         }
 
         /// <summary>
-        /// Запись названия специализации группы
+        /// Свойства поля названия специализации группы
         /// </summary>
-        /// <param name="specialization">Название специализации группы</param>
 
-        public void SetSpecialization(string specialization)
+        public string Specialization
         {
-            this.specialization = specialization;
+            set =>this.specialization = value;
+            get => this.specialization;
         }
 
         /// <summary>
-        /// Запись номера курса
+        /// Свойства поля номера курса
         /// </summary>
-        /// <param name="courseNumber">Номер курса</param>
-
-        public void SetCourseNumber( int courseNumber)
+ 
+        public int CourseNumber
         {
-            try
+            set
             {
-                if (courseNumber < 0 && courseNumber > 5)
-                    throw new Exception("Некорректный номер курса, введите число от 1 до 5!");
-                this.courseNumber = courseNumber;
+                try
+                {
+                    if (value < 0 && value > 5)
+                        throw new Exception("Некорректный номер курса, введите число от 1 до 5!");
+                    this.courseNumber = value;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
             }
-            catch(Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
+            get => this.courseNumber;
         }
 
-        /// <summary>
-        /// Получение названия группы
-        /// </summary>
-        /// <returns>Название группы</returns>
-        public string GetGroupName()
-        {
-            return groupName;
-        }
-
-        /// <summary>
-        /// Получение специализации группы
-        /// </summary>
-        /// <returns>специализация группы</returns>
-
-        public string GetSpecialization()
-        {
-            return specialization;
-        }
-
-        /// <summary>
-        /// Получение номера курса
-        /// </summary>
-        /// <returns>Номер курса</returns>
-
-        public int GetCourseNumber()
-        {
-            return courseNumber;
-        }
-
-        /// <summary>
-        /// Вывод информации о всех студентах в группе и их рейтинге
-        /// </summary>
 
         public void PrintGroup()
         {
-            Console.WriteLine("Name of Group : " + GetGroupName());
-            Console.WriteLine("Specialization of group : " + GetSpecialization());
+            Console.WriteLine("Name of Group : " + groupName);
+            Console.WriteLine("Specialization of group : " + specialization);
             Console.WriteLine("\n\n");
             var sortedStudent = from s in students
-                                orderby s.GetSurname() ascending
+                                orderby s.Surname ascending
                                 select s;
             int number = 1;
             foreach (var s in sortedStudent)
@@ -252,6 +224,24 @@ namespace Studentt
         public static bool operator !=(Group left, Group right)
         {
             return left.students.Count != right.students.Count;
+        }
+
+        public Student this[int index]
+        {
+            get
+            {
+                if (index < 0 || index >= students.Count)
+                    throw new IndexOutOfRangeException();
+                else
+                {
+
+                    return students.ElementAt(index);
+                }
+            }
+            set
+            {
+                students[index] = value;
+            }
         }
     }
 }

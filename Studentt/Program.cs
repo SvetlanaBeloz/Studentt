@@ -15,18 +15,19 @@
         static void Main(string[] args)
         {
 
-            Student student = new Student("AAAA", "WWWW", "GGGG");
-            Student student1 = new Student("AAAA", "DDDD", "VVVVV");
-            student.AddExams(10);
-            student.AddExams(10);
-            student1.AddExams(10);
-            student1.AddExams(10);
-            Console.WriteLine(student < student1);
+            Student student = new Student();
+            Console.WriteLine(student["projects", 0]); 
+            //Student student1 = new Student("u","Y", "r");
+            //student.AddExams(10);
+            //student.AddExams(10);
+            //student1.AddExams(0);
+            //student1.AddExams(0);
+            //Console.WriteLine(student < student1);
 
-            Console.WriteLine(student != student1);
-            Group first = new Group(10);
-            Group second = new Group(20);
-            Console.WriteLine(first != second);
+            //Console.WriteLine(student != student1);
+            //Group first = new Group();
+            //Group second = new Group();
+            //Console.WriteLine(first != second);
 
             //student.AddOffset(10);
             //student.AddOffset(10);
@@ -42,6 +43,10 @@
             //Console.WriteLine($"\n{student.RandomDay().ToString("d")}");
             //Console.WriteLine("\n\n");
             //Group group = new Group();
+            //Console.WriteLine(group[0]);
+        
+            //group.PrintGroup();
+            //group.Specialization = "hfhfhf";
             //group.PrintGroup();
             //Student s = group.WorstStudentExpulsion();
             //s.PrintInfo();
