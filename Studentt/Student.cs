@@ -12,78 +12,21 @@ namespace Studentt
     /// </summary>
    
 {
-    public class Student
+    public class Student : Person
     {
-        private string name;
-        private string surname;
-        private string patronymic;
-        private string address;
-        private string phoneNumber;
-        private DateTime birthday;
 
         private List<int> offset = new();
         private List<int> projects = new();
         private List<int> exams = new();
 
-
-        public static string[] names = {"Александр", "Алексей", "Андрей", "Василий", "Георгий", "Михаил", "Никита", "Фёдор", "Тимофей",
-            "Семён", "Дарья", "Елена", "Марина", "Илона", "Варвара", "Ирина", "Татьяна", "Светлана", "Ольга", "Юлия"};
-
-        public static string[] surnames = {"Александров", "Алексеев", "Андреев", "Васильев", "Георгиев", "Михайлов", "Никитин", "Федоров",
-        "Тимофеев", "Семенов", "Александрова", "Алексеева", "Андреева", "Васильева", "Георгиева", "Михайлова", "Никитина", "Федорова",
-        "Тимофеева", "Семенова"};
-
-        public static string[] patronymics = {"Александрович", "Алексеевич", "Андреевич", "Васильевич", "Георгиевич", "Михайлович",
-            "Никитович", "Федорович", "Тимофеевич", "Семенович", "Александровна", "Алексеевна", "Андреевна", "Васильевна",
-            "Георгиевна", "Михайловна", "Никитична", "Федоровна", "Тимофеевна", "Семеновна"};
-
-        public static string[] addresses = {"Дерибасовская 15", "Гоголя 3", "Марсельская 60", "Греческая 18", "Левитана 23", "Львовская 34",
-        "Бугаевская 40", "Польская 13", "Виноградная 25", "Гаванная 1"};
-
-        public static string[] phoneNumbers = { "111111", "222222", "333333", "444444", "555555", "666666", "777777", "888888", "999999" };
-
-        public static Random random = new Random();
-
         /// <summary>
-        /// Конструктор без параметров с генерацией случайной информации о студенте.
+        /// Конструктор без параметров с генерацией случайной информации о студенте и его оценках.
         /// </summary>
 
-        public Student()
-        {
-            int gender = random.Next(0, 2);
-            if (gender == 0)
-            {
-                Surname = surnames[random.Next(10)];
-                Name = names[random.Next(10)];
-                Patronymic = patronymics[random.Next(10)];
-            }
-            else
-            {
-                Surname = surnames[random.Next(10, 20)];
-                Name = names[random.Next(10, 20)];
-                Patronymic = patronymics[random.Next(10, 20)];
-            }
-            Address = addresses[random.Next(10)];
-            PhoneNumber = phoneNumbers[random.Next(9)];
-            RandomDay();
-            for (int j = 0; j < 8; j++)
-            {
-                AddExams(random.Next(2, 13));
-                AddProjects(random.Next(2, 13));
-                AddOffset(random.Next(2, 13));
-            }
-        }
+        public Student() : base() { }
 
-        /// <summary>
-        /// Конструктор с параметрами имени, фамилии, отчества
-        /// </summary>
-        /// <param name="name">Имя студента</param>
-        /// <param name="surname">Фамилия студента</param>
-        /// <param name="patronymic">Отчество студента</param>
+        public Student(string name, string surname, string patronymic) : base(name, surname, patronymic) { }
 
-        public Student(string name, string surname, string patronymic) : this(name, surname, patronymic,
-            "street Aleksandrovskaya, 15", "223332", new DateTime(2000, 01, 01))
-        { }
 
         /// <summary>
         /// Конструктор со всеми параметрами
@@ -94,15 +37,16 @@ namespace Studentt
         /// <param name="address">Адрес студента</param>
         /// <param name="birthday">День рождение студента</param>
         /// <param name="phoneNumber">номер телефона студента</param>
+        /// <param name="e">массив с оцеками за экзамены</param>
+        /// <param name="p">массив с оцеками за курсовые работы</param>
+        /// <param name="o">массив с оцеками за зачеты</param>
 
-        public Student(string name, string surname, string patronymic, string address, string phoneNumber, DateTime birthday)
+        public Student(string name, string surname, string patronymic, string address, string phoneNumber, DateTime birthday,
+            List<int> e, List<int> p, List<int> o) : base(name, surname, patronymic, address, phoneNumber, birthday)
         {
-            Name = name;
-            Surname = surname;
-            Patronymic = patronymic;
-            Address = address;
-            PhoneNumber = phoneNumber;
-            Birthday = birthday;
+            this.offset = o;
+            this.projects = p;
+            this.exams = e;
         }
 
         /// <summary>
@@ -166,130 +110,6 @@ namespace Studentt
         }
 
         /// <summary>
-        /// Свойства поля имени студента
-        /// </summary>
-       
-        public string Name
-        {
-            set {
-                try
-                {
-                    bool result = value.All(Char.IsLetter);
-                    if (!result)
-                        throw new Exception("Не можем присвоить студенту вводимое имя, так как имя должно состоять только из букв");
-                    name = value;
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                }
-            }
-            get => this.name;
-        }
-
-        /// <summary>
-        /// Свойства поля фамилии студента
-        /// </summary>
-     
-        public string Surname
-        {
-            set
-            {
-                try
-                {
-                    bool result = value.All(Char.IsLetter);
-                    if (!result)
-                        throw new Exception("Не можем присвоить студенту вводимую фамилию, так как фамилия должна состоять только из букв");
-                    surname = value;
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                }
-            }
-            get => this.surname;
-        }
-
-        /// <summary>
-        /// Свойства поля отчества студента
-        /// </summary>
-        
-        public string Patronymic
-        {
-            set
-            {
-                try
-                {
-                    bool result = value.All(Char.IsLetter);
-                    if (!result)
-                        throw new Exception("Не можем присвоить студенту вводимое отчество, так как отчество должно состоять только из букв");
-                    patronymic = value;
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                }
-            }
-
-            get => this.patronymic;
-        }
-
-        /// <summary>
-        /// Свойства поля адреса студента
-        /// </summary>
-        
-        public string Address { 
-            set =>address = value;
-            get =>this.address; }
-
-
-        /// <summary>
-        /// Свойства поля номера телефона студента
-        /// </summary>
-
-
-        public string PhoneNumber
-        {
-            set => phoneNumber = value;
-            get => this.phoneNumber;
-        }
-
-        /// <summary>
-        /// Свойства поля дня рождения студента
-        /// </summary>
-
-
-        public DateTime Birthday
-        {
-            set
-            {
-                try
-                {
-                    if (value.Year < 1970 && value.Year > 2006)
-                        throw new Exception("Некорректный год рождения!");
-                    birthday = value;
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                }
-            }
-            get => this.birthday;
-        }
-        /// <summary>
-        /// Формирование случайной даты в заданном диапазоне
-        /// </summary>
-        /// <returns>день рождения</returns>
-
-        public DateTime RandomDay()
-        {
-            DateTime start = new (1995, 1, 1);
-            DateTime finish = new (2004, 1, 1);
-            int range = (finish - start).Days;
-            return birthday = start.AddDays(random.Next(range));
-        }
-
-        /// <summary>
         /// Вычисление среднего балла студента по экзаменам
         /// </summary>
         /// <returns>Средний балл студента по экзаменам</returns>
@@ -307,14 +127,9 @@ namespace Studentt
         /// Вывод на экран информации по студенту и его оценки
         /// </summary>
 
-        public void PrintInfo()
+        public override void PrintInfo()
         {
-            Console.WriteLine("surname - " + Surname);
-            Console.WriteLine("name - " + Name);
-            Console.WriteLine("patronymic - " + Patronymic);
-            Console.WriteLine("address - " + Address);
-            Console.WriteLine("phone number - " + PhoneNumber);
-            Console.WriteLine("date of birth - " + ($"{Birthday.ToString("d")}")); 
+            base.PrintInfo();
             Console.Write ("offsets  :\t");
             foreach (var item in offset)
             {

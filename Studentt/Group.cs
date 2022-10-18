@@ -17,6 +17,8 @@ namespace Studentt
         private string groupName = "ПУ111";
         private string specialization = "Программирование на .Net";
         private int courseNumber = 2;
+
+        enum RangeOfStudents { Bad = 1, Good, SoSo}
    
         /// <summary>
         /// конструктор без параметров на 12 студентов
@@ -25,7 +27,21 @@ namespace Studentt
         {
             for (int i = 0; i < 12; i++)
             {
-                students.Add(new Student());
+                RangeOfStudents RangeOfStudents = (RangeOfStudents)Person.random.Next(1, 4);
+                switch (RangeOfStudents)
+                    {
+                    case RangeOfStudents.Bad:
+                        students.Add(new BadStudent());
+                        break;
+
+                    case RangeOfStudents.Good:
+                    students.Add(new GoodStudent());
+                        break;
+
+                    case RangeOfStudents.SoSo:
+                            students.Add(new SoSoStudent());
+                        break;
+                }
                 CourseNumber = courseNumber;
                 GroupName = groupName;
                 Specialization = specialization;
@@ -40,7 +56,21 @@ namespace Studentt
         {
             for (int i = 0; i < number; i++)
             {
-                students.Add(new Student());
+                RangeOfStudents RangeOfStudents = (RangeOfStudents)Person.random.Next(1, 4);
+                switch (RangeOfStudents)
+                {
+                    case RangeOfStudents.Bad:
+                        students.Add(new BadStudent());
+                        break;
+
+                    case RangeOfStudents.Good:
+                        students.Add(new GoodStudent());
+                        break;
+
+                    case RangeOfStudents.SoSo:
+                        students.Add(new SoSoStudent());
+                        break;
+                }
                 CourseNumber = courseNumber;
                 GroupName = groupName;
                 Specialization = specialization;

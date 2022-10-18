@@ -15,8 +15,8 @@
         static void Main(string[] args)
         {
 
-            Student student = new Student();
-            Console.WriteLine(student["projects", 0]); 
+            //Student student = new Student();
+            //Console.WriteLine(student["projects", 0]); 
             //Student student1 = new Student("u","Y", "r");
             //student.AddExams(10);
             //student.AddExams(10);
@@ -44,7 +44,7 @@
             //Console.WriteLine("\n\n");
             //Group group = new Group();
             //Console.WriteLine(group[0]);
-        
+
             //group.PrintGroup();
             //group.Specialization = "hfhfhf";
             //group.PrintGroup();
@@ -56,6 +56,22 @@
             //group.TransferStudent(0, group1);
             //group.PrintGroup();
             //group1.PrintGroup();
+
+            //Aspirant a = new Aspirant();
+            //a.Course = 4;
+            //a.NameOfDessertation = "TTTT";
+            //Console.WriteLine(a.Name);
+            //a.PrintInfo();
+            Student student = new BadStudent();
+            student.PrintInfo();
+            Group g = new Group();
+            g.AddStudent(student);
+            g.PrintGroup();
+            Student s = new GoodStudent();
+            s.PrintInfo();
+            g.AddStudent(s);
+            g.PrintGroup();
+
 
         }
     }
