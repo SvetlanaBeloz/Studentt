@@ -12,7 +12,7 @@ namespace Studentt
     /// </summary>
    
 {
-    public class Student : Person
+    public class Student : Person, ICloneable, IComparable<Student>
     {
 
         private List<int> offset = new();
@@ -20,7 +20,7 @@ namespace Studentt
         private List<int> exams = new();
 
         /// <summary>
-        /// Конструктор без параметров с генерацией случайной информации о студенте и его оценках.
+        /// Конструктор без параметров с генерацией случайной информации о студенте 
         /// </summary>
 
         public Student() : base() { }
@@ -179,6 +179,26 @@ phone number - {PhoneNumber}
 date of birth - {$"{Birthday.ToString("d")}"}";
 
             return result;
+        }
+
+        public object Clone()
+        {
+            var copyOffset = new List<int>();
+            copyOffset.AddRange(this.offset);
+            var copyProjects = new List<int>();
+            copyProjects.AddRange(this.projects);
+            var copyExams = new List<int>();
+            copyExams.AddRange(this.exams);
+;           var copy = new Student(this.Name, this.Surname, this.Patronymic, this.Address, this.PhoneNumber, this.Birthday, 
+            copyExams, copyProjects, copyOffset);
+            return copy;
+        }
+
+        public int CompareTo(Student anotherStudent)
+        {
+            if (this.ExamsRate() > anotherStudent.ExamsRate()) return 1;
+            if (this.ExamsRate() < anotherStudent.ExamsRate()) return -1;
+            return 0;
         }
 
         public double this[string name, int index]

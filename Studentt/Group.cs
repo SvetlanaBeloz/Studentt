@@ -11,7 +11,7 @@ namespace Studentt
     /// класс Group (группа студентов)
     ///</summary>
 {
-    public class Group
+    public class Group : ICloneable, IComparable<Group>
     {
         private List<Student> students = new ();
         private string groupName = "ПУ111";
@@ -98,12 +98,35 @@ namespace Studentt
             List<Student> copyStudents = new List<Student>();
             foreach(var student in inputGroup.students)
             {
-                copyStudents.Add(student);
+                copyStudents.Add((Student)student.Clone());
             }
             this.students = copyStudents;
             this.courseNumber = inputGroup.courseNumber;
             this.groupName = inputGroup.groupName;
             this.specialization = inputGroup.specialization;
+        }
+
+        public object Clone()
+        {
+            List<Student> copyStudents = new List<Student>();
+            foreach (var student in this.students)
+            {
+                copyStudents.Add((Student)student.Clone());
+            }
+            var copy = new Group(copyStudents)
+            {
+                CourseNumber = this.CourseNumber,
+                GroupName = this.GroupName,
+                specialization = this.specialization
+            };
+            return copy;
+        }
+
+        public int CompareTo(Group anotherGroup)
+        {
+            if (this.students.Count > anotherGroup.students.Count) return 1;
+            if (this.students.Count < anotherGroup.students.Count) return -1;
+            return 0;
         }
 
         /// <summary>
