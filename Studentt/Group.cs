@@ -106,29 +106,7 @@ namespace Studentt
             this.specialization = inputGroup.specialization;
         }
 
-        public object Clone()
-        {
-            List<Student> copyStudents = new List<Student>();
-            foreach (var student in this.students)
-            {
-                copyStudents.Add((Student)student.Clone());
-            }
-            var copy = new Group(copyStudents)
-            {
-                CourseNumber = this.CourseNumber,
-                GroupName = this.GroupName,
-                specialization = this.specialization
-            };
-            return copy;
-        }
-
-        public int CompareTo(Group anotherGroup)
-        {
-            if (this.students.Count > anotherGroup.students.Count) return 1;
-            if (this.students.Count < anotherGroup.students.Count) return -1;
-            return 0;
-        }
-
+       
         /// <summary>
         /// Свойства поля названия группы
         /// </summary>
@@ -316,5 +294,29 @@ namespace Studentt
                 students[index] = value;
             }
         }
+
+        public object Clone()
+        {
+            List<Student> copyStudents = new List<Student>();
+            foreach (var student in this.students)
+            {
+                copyStudents.Add((Student)student.Clone());
+            }
+            var copy = new Group(copyStudents)
+            {
+                CourseNumber = this.CourseNumber,
+                GroupName = this.GroupName,
+                specialization = this.specialization
+            };
+            return copy;
+        }
+
+        public int CompareTo(Group anotherGroup)
+        {
+            if (this.students.Count > anotherGroup.students.Count) return 1;
+            if (this.students.Count < anotherGroup.students.Count) return -1;
+            return 0;
+        }
+
     }
 }
