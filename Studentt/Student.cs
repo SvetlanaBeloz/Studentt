@@ -221,5 +221,29 @@ date of birth - {$"{Birthday.ToString("d")}"}";
             return 0;
         }
 
+        public class CompareByName : IComparer<Student>
+        {
+            public int Compare(Student left, Student right)
+            {
+                return string.Compare(left.Name, right.Name);
+            }
+        }
+
+        public class CompareBySurname : IComparer<Student>
+        {
+            public int Compare(Student left, Student right)
+            {
+                return string.Compare(left.Surname, right.Surname);
+            }
+        }
+
+        public class CompareByExamsRate : IComparer<Student>
+        {
+            public int Compare(Student left, Student right)
+            {
+                return string.Compare(left.ExamsRate().ToString(), right.ExamsRate().ToString());
+            }
+        }
+
     }
 }

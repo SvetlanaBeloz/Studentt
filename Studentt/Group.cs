@@ -318,5 +318,26 @@ namespace Studentt
             return 0;
         }
 
+        public class CompareByNumberOfStudents : IComparer<Group>
+        {
+            public int Compare(Group left, Group right)
+            {
+                return left.students.Count.CompareTo(right.students.Count);
+            }
+        }
+
+        public class CompareByNameOfGroup : IComparer<Group>
+        {
+            public int Compare(Group left, Group right)
+            {
+                return left.groupName.CompareTo(right.groupName);
+            }
+        }
+
+        public Enumerator GetEnumerator()
+        {
+            return new Enumerator(students);
+        }
+
     }
 }

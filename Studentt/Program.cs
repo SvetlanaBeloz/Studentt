@@ -15,6 +15,13 @@
         static void Main(string[] args)
         {
 
+            Group g = new ();
+            foreach (var item in g)
+            {
+                (item as Student).PrintInfo();
+                Console.WriteLine("\n");
+            }
+            
             //Student student = new Student();
             //Console.WriteLine(student["projects", 0]); 
             //Student student1 = new Student("u","Y", "r");
@@ -62,15 +69,15 @@
             //a.NameOfDessertation = "TTTT";
             //Console.WriteLine(a.Name);
             //a.PrintInfo();
-            Student student = new BadStudent();
-            student.PrintInfo();
-            Group g = new Group();
-            g.AddStudent(student);
-            g.PrintGroup();
-            Student s = new GoodStudent();
-            s.PrintInfo();
-            g.AddStudent(s);
-            g.PrintGroup();
+            //Student student = new BadStudent();
+            //student.PrintInfo();
+            //Group g = new Group();
+            //g.AddStudent(student);
+            //g.PrintGroup();
+            //Student s = new GoodStudent();
+            //s.PrintInfo();
+            //g.AddStudent(s);
+            //g.PrintGroup();
 
 
         }
